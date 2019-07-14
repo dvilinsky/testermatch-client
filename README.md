@@ -1,7 +1,8 @@
 # Running the Project
 1. Ensure that the [backend service](https://github.com/dvilinsky/testermatch) is up and running. 
 2. Install [gradle](https://gradle.org/install/)
-3. Run gradlew clean build. 
+3. Run gradlew clean build. If you are on linux, you may get the error: "./gradlew: Permission denied". If so, change the file
+permissions with `chmod +x gradlew` 
 4. This will create the jar at `build/libs/testermatch-client-1.0-SNAPSHOT.jar`. Run this jar with
 `java -jar build/libs/testermatch-client-1.0-SNAPSHOT.jar`
 5. Client will be accessible on the command line. 
