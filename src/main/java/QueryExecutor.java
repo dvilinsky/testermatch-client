@@ -9,6 +9,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
+/**
+ * This class does the bulk of the work of the program. It routes each search query to the correct endpoint, builds
+ * up an HTTP request, executes the request, and returns the result to the client in a prettified format.
+ */
 public class QueryExecutor {
     private static final int SERVER_PORT = 8080;
     private static final String ALL_TESTERS_PATH = "testers/all";
@@ -18,12 +22,23 @@ public class QueryExecutor {
     private List<String> devices;
     private CloseableHttpClient client;
 
+    /**
+     * Constructor for this class.
+     * @param countries List of countries for which you wish to search for testers in. Can be empty
+     * @param devices List of devices for which you wish to search for testers testing on. Can be empty;
+     */
     public QueryExecutor(List<String> countries, List<String> devices) {
         this.countries = countries;
         this.devices = devices;
         this.client = HttpClientBuilder.create().build();
     }
 
+    /**
+     * Does the main work of routing and executes the query
+     * @return The result set of each query
+     * @throws URISyntaxException
+     * @throws IOException
+     */
     public String executeQuery() throws URISyntaxException, IOException {
         String country0 = countries.get(0);
         String device0 = devices.get(0);
@@ -45,11 +60,23 @@ public class QueryExecutor {
         return new ResponseFormatter(response).format();
     }
 
+    /**
+     * Generates the URI for the "find all testers" case
+     * @return Correct URI for this search
+     * @throws URISyntaxException
+     */
     private URI getUri() throws URISyntaxException {
         URIBuilder builder = getBaseBuilder(ALL_TESTERS_PATH);
         return builder.build();
     }
 
+    /**
+     * Generates the URI for a search done either by country, or by device, but not both
+     * @param param Search key
+     * @param params Values for which you wish to search
+     * @return Correct URI for this search
+     * @throws URISyntaxException
+     */
     private URI getUri(String param, List<String> params) throws URISyntaxException {
         URIBuilder builder = getBaseBuilder(TESTER_BASE_PATH + "/" + param);
         for (String paramValue : params) {
@@ -58,6 +85,13 @@ public class QueryExecutor {
         return builder.build();
     }
 
+    /**
+     * Generates the URI for a search by both country and device.
+     * @param devices List of devices on which search is to be performed
+     * @param countries List of countries on which search is to be performed
+     * @return Correct URI for this search
+     * @throws URISyntaxException
+     */
     private URI getUri(List<String> devices, List<String> countries) throws URISyntaxException {
         URIBuilder builder = getBaseBuilder(TESTER_BASE_PATH);
         for (String country : countries) {

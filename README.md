@@ -53,5 +53,5 @@ As with the backend, the client suffers from the same extensibilty problem noted
 `QueryExecutor`, there is an `if` block which performs the routing. As the number of search dimensions 
 grows, this `if` block grows exponentially. 
 
-Other areas for improvement include the validation regex in `src/main/java/Validators`. While it works, it could probably be tighter
+Other areas for improvement include the validation regex in `src/main/java/Validator`. While it works, it could probably be tighter
 and accept less input than it currently does. 
