@@ -1,4 +1,4 @@
-#Running the Project
+# Running the Project
 1. Ensure that the [backend service](https://github.com/dvilinsky/testermatch) is up and running. 
 2. Install [gradle](https://gradle.org/install/)
 3. Run gradlew clean build. 
