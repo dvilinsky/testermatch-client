@@ -16,14 +16,14 @@ public class TesterMatchMain {
         while (true) {
             String countries = getField("country", input);
             checkQuit(countries);
-            if (isValidInput(countries)){
+            if (!isValidInput(countries)){
                 System.out.println(INPUT_ERROR_MSG);
                 continue;
             }
 
             String devices = getField("device", input);
             checkQuit(devices);
-            if (isValidInput(devices)){
+            if (!isValidInput(devices)){
                 System.out.println(INPUT_ERROR_MSG);
                 continue;
             }
